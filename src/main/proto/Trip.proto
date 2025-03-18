@@ -1,0 +1,25 @@
+syntax = "proto3";
+package org.zero.ds6;
+import "google/protobuf/empty.proto";
+option java_package = "org.zero.ds6";
+
+message Trip {
+  int32 id = 1;
+  string destination = 2;
+  double price = 3;
+  int32 seats_available = 4;
+}
+
+message TripsResponse {
+  repeated Trip trips = 1;
+}
+
+message RemoveRequest {
+  int32 trip_id = 1;
+}
+
+service TripService {
+  rpc getTrip(google.protobuf.Empty) returns (TripsResponse) {};
+  rpc createTrip(Trip) returns (google.protobuf.Empty) {};
+  rpc removeTrip(RemoveRequest) returns (google.protobuf.Empty) {};
+}

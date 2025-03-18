@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2
+    }
+
+    th {
+        background-color: #04AA6D;
+        color: white;
+    }
+</style>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Destination</th>
+        <th>Price</th>
+        <th>Available Seats</th>
+        <th>Actions</th>
+    </tr>
+    <tr th:each="trip: ${trips}">
+        <td th:text="${trip.id()}"></td>
+        <td th:text="${trip.destination()}"></td>
+        <td th:text="${trip.price()}"></td>
+        <td th:text="${trip.seatsAvailable()}"></td>
+        <td>
+            <form action="#" th:action="${'/trip/' + trip.id()}" method="post">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+</table>
+<form action="#" th:action="@{/trip}" method="post" th:object="${trips.getFirst()}">
+    <input name="destination" placeholder="Enter Destination" type="text"/>
+    <input name="price" placeholder="Enter Price" type="number">
+    <input name="seatsAvailable" placeholder="Enter Available Seats Count" type="number">
+    <button type="submit">Create</button>
+</form>
+</body>
+</html>
