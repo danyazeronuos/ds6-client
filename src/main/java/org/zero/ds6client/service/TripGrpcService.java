@@ -13,7 +13,7 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class TripService {
+public class TripGrpcService {
     @GrpcClient("web-client")
     private TripServiceGrpc.TripServiceBlockingStub tripStub;
 

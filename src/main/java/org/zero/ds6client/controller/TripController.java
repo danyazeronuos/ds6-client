@@ -6,14 +6,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.zero.ds6client.model.Trip;
-import org.zero.ds6client.service.TripService;
+import org.zero.ds6client.service.TripRestService;
 
 @Slf4j
 @Controller
 @RequestMapping("/trip")
 @RequiredArgsConstructor
 public class TripController {
-    private final TripService tripService;
+    private final TripRestService tripService;
 
     @GetMapping
     public String index(Model model) {
@@ -31,6 +31,7 @@ public class TripController {
 
     @PostMapping
     public String create(@ModelAttribute Trip trip) {
+        log.info("create trip: {}", trip);
         tripService.createTrip(trip);
 
         return "redirect:/trip";
